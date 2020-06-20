@@ -1,0 +1,14 @@
+<div class="container margin-bottom-2">
+
+  <div class="columns is-multiline is-mobile">
+
+    <div class="column" *ngFor="let csv of csvData">
+      <span class="tag is-info is-medium">
+        {{csv.fileName}}
+        <button class="delete"></button>
+      </span>
+    </div>
+
+  </div>
+
+</div>

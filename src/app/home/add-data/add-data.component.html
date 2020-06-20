@@ -1,0 +1,9 @@
+<div class="container margin-bottom-2">
+  <div>
+    <input #csvInput multiple hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)"
+      accept=".csv" />
+    <button mat-flat-button color="primary" (click)="csvInput.click()">Choose Spreadsheet File (CSV)</button>
+  </div>
+
+
+</div>
