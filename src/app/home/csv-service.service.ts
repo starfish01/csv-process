@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { CookieService } from 'ngx-cookie-service';
+import {SnackBarService} from './includes/snack-bar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +15,11 @@ export class CsvServiceService {
   csvData = [];
   selectedCsv = null;
 
-  constructor(private cookieService: CookieService) {}
+  constructor(private cookieService: CookieService, private snackbarService: SnackBarService) {}
 
   addCsv(file) {
 
+    this.snackbarService.openSnackBar('CSV(s) Added', 'close');
     this.csvData.push(file);
     // this.setCookie();
     this.csvDataChanged.next(this.csvData);
@@ -31,6 +33,7 @@ export class CsvServiceService {
       this.selectedCsv = null;
       this.selectedCsvChanged.next(this.selectedCsv);
     }
+    this.snackbarService.openSnackBar('CSV Removed', 'close');
     // this.setCookie();
     this.csvDataChanged.next(this.csvData);
   }
@@ -39,6 +42,7 @@ export class CsvServiceService {
     this.csvData = [];
     this.deleteCookie();
     this.selectCSV = null;
+    this.snackbarService.openSnackBar('All CSV(s) Removed', 'close');
     this.selectedCsvChanged.next(this.selectCSV);
     this.csvDataChanged.next(this.csvData);
   }
@@ -54,6 +58,10 @@ export class CsvServiceService {
     this.selectedCsvChanged.next(this.selectedCsv);
   }
 
+  customSnackbarMessage(message: string, action: string) {
+    this.snackbarService.openSnackBar(message, action);
+  }
+
   updateCsv(selectedCsv: any) {
 
     // lodash
@@ -61,6 +69,7 @@ export class CsvServiceService {
       return a.fileName === selectedCsv.fileName ? selectedCsv : a;
     });
 
+    this.snackbarService.openSnackBar('CSV Updated', 'close');
     this.selectCSV(selectedCsv);
     this.csvData = newCsvData;
     // this.setCookie();
@@ -87,7 +96,7 @@ export class CsvServiceService {
     const cookie = this.cookieService.get('synergetic-data');
     console.log('get Cookie');
     console.log(cookie);
-    return cookie
+    return cookie;
   }
 
   deleteCookie() {

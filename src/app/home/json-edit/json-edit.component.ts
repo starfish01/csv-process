@@ -19,12 +19,11 @@ export class JsonEditComponent implements OnInit, OnDestroy {
   selectedCsv: any;
   private selectedCsvSub: Subscription;
 
-  editorData: Object;
+  editorData: object;
 
   constructor(private csvService: CsvServiceService) {}
 
   ngOnInit(): void {
-
     this.selectedCsv = this.csvService.selectedCsv;
     this.setUpEditor();
     this.selectedCsvSub = this.csvService.selectedCsvChanged.subscribe(

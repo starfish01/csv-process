@@ -13,7 +13,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ClipboardModule } from '@angular/cdk/clipboard';
-import { NgJsonEditorModule } from 'ang-jsoneditor'
+import { NgJsonEditorModule } from 'ang-jsoneditor';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 
 import { HomeComponent } from './home/home.component';
@@ -23,6 +25,7 @@ import { DisplayColumnsComponent } from './home/display-columns/display-columns.
 import { ExportComponent } from './home/export/export.component';
 import { CleanCsvComponent } from './home/clean-csv/clean-csv.component';
 import { JsonEditComponent } from './home/json-edit/json-edit.component';
+import { SnackbarComponent } from './home/includes/snackbar/snackbar.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,7 @@ import { JsonEditComponent } from './home/json-edit/json-edit.component';
     ExportComponent,
     CleanCsvComponent,
     JsonEditComponent,
+    SnackbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +50,8 @@ import { JsonEditComponent } from './home/json-edit/json-edit.component';
     MatButtonModule,
     MatProgressBarModule,
     ClipboardModule,
-    NgJsonEditorModule
+    NgJsonEditorModule,
+    MatSnackBarModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

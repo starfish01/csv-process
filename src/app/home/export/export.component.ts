@@ -27,7 +27,7 @@ export class ExportComponent implements OnInit {
   }
 
   onCopyJson() {
-    console.log(this.selectedCsv.data);
+    this.csvService.customSnackbarMessage('Copied JSON to Clipboard', 'close');
     this.clipboard.copy(JSON.stringify(this.selectedCsv.data));
   }
 
