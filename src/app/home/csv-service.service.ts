@@ -38,6 +38,8 @@ export class CsvServiceService {
   clearAll() {
     this.csvData = [];
     this.deleteCookie();
+    this.selectCSV = null;
+    this.selectedCsvChanged.next(this.selectCSV);
     this.csvDataChanged.next(this.csvData);
   }
 
