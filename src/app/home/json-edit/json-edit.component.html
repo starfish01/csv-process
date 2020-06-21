@@ -1,0 +1,11 @@
+<div class="container margin-bottom-2">
+  <div class="buttons" >
+    <button class="button is-primary" (click)="onSave()">
+      <mat-icon aria-hidden="false" slot="start">save</mat-icon>
+      <span slot="end"> Save JSON</span>
+    </button>
+  </div>
+
+  <json-editor style="min-height: 800px;" [options]="editorOptions" [(ngModel)]="editorData" ></json-editor>
+
+</div>

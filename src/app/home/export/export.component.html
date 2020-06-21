@@ -1,10 +1,10 @@
 <div class="container margin-bottom-2">
   <div class="buttons">
-    <button class="button is-info" data-tooltip="Save any changes before copying">
+    <button class="button is-info" (click)="onCopyJson()">
       <mat-icon aria-hidden="false" slot="start">save</mat-icon>
       <span slot="end">Copy JSON</span>
     </button>
-    <button class="button is-info" data-tooltip="Save any changes before downloading">
+    <button class="button is-info" (click)="onDownloadCsv()">
       <mat-icon aria-hidden="false" slot="start">save</mat-icon>
       <span slot="end">Download CSV</span>
     </button>

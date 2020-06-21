@@ -8,13 +8,7 @@ import * as _ from 'lodash';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'csv-process';
-  array = ['fff', 'ssss'];
 
-  constructor() {
+  constructor() {}
 
-    _.forEach(this.array, item => {
-      console.log(item);
-    });
-  }
 }

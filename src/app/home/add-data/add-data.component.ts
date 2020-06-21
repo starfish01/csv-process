@@ -16,16 +16,17 @@ export class AddDataComponent implements OnInit {
   csvInputChange(fileInputEvent: any) {
 
     _.forEach(fileInputEvent.target.files, (file) => {
-      let options = {
+      const options = {
         header: true,
         complete: (result) => {
-          let filename = file.name.replace('.csv', '')
+          const filename = file.name.replace('.csv', '')
           this.csvDataService.addCsv({
             fileName: filename,
             data: result.data
           });
         }
       };
+
 
       this.papa.parse(file,options);
     });

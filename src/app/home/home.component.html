@@ -1,5 +1,40 @@
 <app-add-data></app-add-data>
-<app-csv-tags></app-csv-tags>
-<app-display-columns></app-display-columns>
-<app-clean-csv></app-clean-csv>
-<app-export></app-export>
+<app-csv-tags *ngIf="csvData.length"></app-csv-tags>
+
+<ng-container *ngIf="selectedCsv">
+
+  <div class="tabs is-centered is-boxed">
+    <ul>
+      <li [class]="viewSelected === 'export' ? 'is-active' : ''">
+        <a (click)="onViewChange('export')">
+          <mat-icon aria-hidden="false" slot="start">file_copy</mat-icon>
+          <span>Export CSV/Copy JSON</span>
+        </a>
+      </li>
+      <li [class]="viewSelected === 'update-columns' ? 'is-active' : ''">
+        <a (click)="onViewChange('update-columns')">
+          <mat-icon aria-hidden="false" slot="start">view_column</mat-icon>
+          <span>Update Columns</span>
+        </a>
+      </li>
+      <li [class]="viewSelected === 'json-edit' ? 'is-active' : ''">
+        <a (click)="onViewChange('json-edit')">
+          <mat-icon aria-hidden="false" slot="start">format_align_left</mat-icon>
+          <span>JSON Edit</span>
+        </a>
+      </li>
+      <li [class]="viewSelected === 'clean-data' ? 'is-active' : ''">
+        <a (click)="onViewChange('clean-data')">
+          <mat-icon aria-hidden="false" slot="start">sort</mat-icon>
+          <span>Clean Data</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <app-display-columns *ngIf="viewSelected === 'update-columns'"></app-display-columns>
+  <app-clean-csv *ngIf="viewSelected === 'clean-data'"></app-clean-csv>
+  <app-export *ngIf="viewSelected === 'export'"></app-export>
+  <app-json-edit *ngIf="viewSelected === 'json-edit'"></app-json-edit>
+
+</ng-container>

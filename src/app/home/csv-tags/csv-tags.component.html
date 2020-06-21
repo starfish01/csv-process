@@ -1,14 +1,28 @@
 <div class="container margin-bottom-2">
-
   <div class="columns is-multiline is-mobile">
 
     <div class="column" *ngFor="let csv of csvData">
-      <span class="tag is-info is-medium">
+      <a [className]="(selectedCsv && selectedCsv.fileName === csv.fileName) ? 'is-primary tag is-medium' : 'is-info tag is-medium'"
+        (click)="onSelectCsv(csv)">
         {{csv.fileName}}
-        <button class="delete"></button>
-      </span>
+        <button (click)="onRemove(csv.fileName)" class="delete"></button>
+      </a>
     </div>
-
   </div>
+
+  <div class="columns is-multiline is-mobile" *ngIf="csvData">
+    <div class="column is-offset-10" *ngIf="csvData">
+      <div class="buttons">
+        <button class="button is-danger" (click)="onClearAll()">Clear All</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="columns is-centered" *ngIf="selectedCsv">
+    <div class="column is-narrow">
+      <h3 class="title is-3">{{selectedCsv.fileName}}</h3>
+    </div>
+  </div>
+
 
 </div>
