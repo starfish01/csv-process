@@ -18,7 +18,7 @@ export class CsvServiceService {
   constructor(private cookieService: CookieService, private snackbarService: SnackBarService) {}
 
   addCsv(file) {
-
+    console.log(file);
     this.snackbarService.openSnackBar('CSV(s) Added', 'close');
     this.csvData.push(file);
     // this.setCookie();
@@ -94,8 +94,6 @@ export class CsvServiceService {
 
   getCookie() {
     const cookie = this.cookieService.get('synergetic-data');
-    console.log('get Cookie');
-    console.log(cookie);
     return cookie;
   }
 

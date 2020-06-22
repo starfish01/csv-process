@@ -2,8 +2,10 @@
   <div>
     <input #csvInput multiple hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)"
       accept=".csv" />
-    <button mat-flat-button color="primary" (click)="csvInput.click()">Choose Spreadsheet File (CSV)</button>
+    <div class="buttons">
+      <button  class="button is-success"  (click)="csvInput.click()">Add CSV File(S)</button>
+      <button  class="button is-success"  (click)="addByJson()">Add JSON</button>
+    </div>
   </div>
-
-
 </div>
+
