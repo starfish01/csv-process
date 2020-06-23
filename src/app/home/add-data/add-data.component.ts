@@ -19,7 +19,7 @@ export class AddDataComponent implements OnInit {
   ) {}
 
   quickFormat = false;
-  quickFormatInfo = 'This will remove all columns bar code and description and will remove any columns without values and any duplicates';
+  quickFormatInfo = 'This will remove all columns bar code and description and will remove any rows without values and any duplicates';
 
   ngOnInit(): void {}
 
