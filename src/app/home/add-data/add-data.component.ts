@@ -20,6 +20,8 @@ export class AddDataComponent implements OnInit {
 
   quickFormat = false;
   quickFormatInfo = 'This will remove all columns bar code and description and will remove any rows without values and any duplicates';
+  removeInvalidChars = true;
+
 
   ngOnInit(): void {}
 
@@ -39,6 +41,9 @@ export class AddDataComponent implements OnInit {
           }, this.quickFormat);
         },
         transform: (res) => {
+          if (!this.removeInvalidChars) {
+            return res;
+          }
           return res.replace(/[^\w\s\\\.\-\:\;\&\/]/gi, '');
         },
       };

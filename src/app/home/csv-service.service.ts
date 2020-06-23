@@ -37,8 +37,8 @@ export class CsvServiceService {
     let newData = [];
 
     _.forEach(csvData.data, (row) => {
-      const title = row.code;
-      const value = row.description;
+      const title = row.Description;
+      const value = row.Code;
       if (!title || !value) {
         return;
       }

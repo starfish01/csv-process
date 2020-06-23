@@ -5,10 +5,16 @@
     <div class="buttons">
       <button class="button is-success" (click)="csvInput.click()">Add CSV File(s)</button>
       <button class="button is-success" (click)="addByJson()">Add JSON</button>
-      <label class="checkbox" matTooltipPosition="after" [matTooltip]="quickFormatInfo">
+      <label style="padding-right: 10px;" class="checkbox" matTooltipPosition="after" [matTooltip]="quickFormatInfo">
         <input [(ngModel)]="quickFormat" type="checkbox">
         Quick Format
       </label>
+
+      <label class="checkbox" matTooltipPosition="after" matTooltip="Remove invalid characters">
+        <input [(ngModel)]="removeInvalidChars" type="checkbox">
+        Remove invalid characters
+      </label>
+
     </div>
 
   </div>
