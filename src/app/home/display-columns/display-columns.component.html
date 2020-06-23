@@ -23,11 +23,14 @@
       </th>
     </tr>
 
-    <ng-container *ngFor="let itemRow of selectedCsv.data; let i = index">
-      <tr *ngIf="i <= 5">
+    <ng-container *ngFor="let itemRow of selectedCsv.data | slice:0:10; let i = index">
+      <tr>
         <td *ngFor="let item of selectedCsv.columnTitle">{{itemRow[item]}}</td>
       </tr>
     </ng-container>
   </table>
+  <div style="width:100%; text-align: center;" *ngIf="selectedCsv.data.length > 10">
+    Displaying 10 of {{selectedCsv.data.length}}
+  </div>
 
 </div>

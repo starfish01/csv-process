@@ -3,9 +3,8 @@ import { Papa } from 'ngx-papaparse';
 import * as _ from 'lodash';
 import { CsvServiceService } from '../csv-service.service';
 
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { JsonPopupComponent } from './json-popup/json-popup.component';
-
 
 @Component({
   selector: 'app-add-data',
@@ -13,31 +12,38 @@ import { JsonPopupComponent } from './json-popup/json-popup.component';
   styleUrls: ['./add-data.component.scss'],
 })
 export class AddDataComponent implements OnInit {
-  constructor(private papa: Papa, private csvDataService: CsvServiceService, private dialog: MatDialog) {}
+  constructor(
+    private papa: Papa,
+    private csvDataService: CsvServiceService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {}
 
   csvInputChange(fileInputEvent: any) {
-
     _.forEach(fileInputEvent.target.files, (file) => {
       const options = {
         header: true,
+        delimiter: ',',
+        quotes: false,
+        // skipEmptyLines: 'greedy',
         complete: (result) => {
-          const filename = file.name.replace('.csv', '')
+          const filename = file.name.replace('.csv', '');
           this.csvDataService.addCsv({
             fileName: filename,
-            data: result.data
+            data: result.data,
           });
-        }
+        },
+        transform: (res) => {
+          return res.replace(/[^\w\s\\\.\-\:\;\&\/]/gi, '');
+        },
       };
 
-
-      this.papa.parse(file,options);
+      this.papa.parse(file, options);
     });
-
   }
 
-  addByJson(){
+  addByJson() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -47,5 +53,4 @@ export class AddDataComponent implements OnInit {
 
     this.dialog.open(JsonPopupComponent, dialogConfig);
   }
-
 }
