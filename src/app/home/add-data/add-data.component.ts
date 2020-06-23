@@ -18,9 +18,13 @@ export class AddDataComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
+  quickFormat = false;
+  quickFormatInfo = 'This will remove all columns bar code and description and will remove any columns without values and any duplicates';
+
   ngOnInit(): void {}
 
   csvInputChange(fileInputEvent: any) {
+
     _.forEach(fileInputEvent.target.files, (file) => {
       const options = {
         header: true,
@@ -32,7 +36,7 @@ export class AddDataComponent implements OnInit {
           this.csvDataService.addCsv({
             fileName: filename,
             data: result.data,
-          });
+          }, this.quickFormat);
         },
         transform: (res) => {
           return res.replace(/[^\w\s\\\.\-\:\;\&\/]/gi, '');

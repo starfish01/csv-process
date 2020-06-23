@@ -14,10 +14,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
-import {MatDialogModule} from "@angular/material/dialog";
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { HomeComponent } from './home/home.component';
 import { AddDataComponent } from './home/add-data/add-data.component';
@@ -55,9 +55,8 @@ import { JsonPopupComponent } from './home/add-data/json-popup/json-popup.compon
     ClipboardModule,
     NgJsonEditorModule,
     MatSnackBarModule,
-
-    MatDialogModule
-
+    MatTooltipModule,
+    MatDialogModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

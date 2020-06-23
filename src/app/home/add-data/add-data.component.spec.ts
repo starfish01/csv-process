@@ -6,6 +6,8 @@ describe('AddDataComponent', () => {
   let component: AddDataComponent;
   let fixture: ComponentFixture<AddDataComponent>;
 
+  quickFormat = false;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AddDataComponent ]

@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { CookieService } from 'ngx-cookie-service';
-import {SnackBarService} from './includes/snack-bar.service';
+import { SnackBarService } from './includes/snack-bar.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,14 +15,45 @@ export class CsvServiceService {
   csvData = [];
   selectedCsv = null;
 
-  constructor(private cookieService: CookieService, private snackbarService: SnackBarService) {}
+  constructor(
+    private cookieService: CookieService,
+    private snackbarService: SnackBarService
+  ) {}
 
-  addCsv(file) {
-    console.log(file);
+  addCsv(file, quickFormat: boolean = false) {
+    if (quickFormat) {
+      file = this.quickFormat(file);
+    }
+
     this.snackbarService.openSnackBar('CSV(s) Added', 'close');
     this.csvData.push(file);
     // this.setCookie();
     this.csvDataChanged.next(this.csvData);
+  }
+
+  quickFormat(file) {
+    //
+    const csvData = file;
+    let newData = [];
+
+    _.forEach(csvData.data, (row) => {
+      const title = row.code;
+      const value = row.description;
+      if (!title || !value) {
+        return;
+      }
+      newData.push({
+        value,
+        title,
+      });
+    });
+
+    newData = _.uniqBy(newData, 'title');
+    newData = _.uniqBy(newData, 'value');
+
+    csvData.data = newData;
+
+    return csvData;
   }
 
   removeCsv(fileName) {
@@ -63,7 +94,6 @@ export class CsvServiceService {
   }
 
   updateCsv(selectedCsv: any) {
-
     // lodash
     const newCsvData = _.map(this.csvData, (a) => {
       return a.fileName === selectedCsv.fileName ? selectedCsv : a;
