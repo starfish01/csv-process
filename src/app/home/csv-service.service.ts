@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { CookieService } from 'ngx-cookie-service';
 import { SnackBarService } from './includes/snack-bar.service';
+import { element } from 'protractor';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,41 @@ export class CsvServiceService {
 
   csvData = [];
   selectedCsv = null;
+
+  quickCheckRemoveSchoolsIncludes = [
+    'Army',
+    'Apprenticeship',
+    'ABC Learning Centres',
+    'Deceased',
+    'Didnt leave',
+    'Didnt leave',
+    'Drama School',
+    'Early Learners',
+    'Family Day Care',
+    'Home Schooling',
+    'Day Care',
+    'In ',
+    'To ',
+    'Interstate',
+    'Kindergarten',
+    'Child Care',
+    'Kinder',
+    'Language School',
+    'Language Centre',
+    'Not Applicable',
+    'Not known',
+    'Not Leaving',
+    'Overseas',
+    'Pre-apprenticeship',
+    'Seeking Apprenticeship',
+    'Special School',
+    'Kids',
+    'TAFE',
+    'PreSchool',
+    'University',
+    'Childrens Centre',
+    'YMCA',
+  ];
 
   constructor(
     private cookieService: CookieService,
@@ -51,9 +87,33 @@ export class CsvServiceService {
     newData = _.uniqBy(newData, 'title');
     newData = _.uniqBy(newData, 'value');
 
+    if (csvData.fileName === 'LookupSchool') {
+      newData = this.cleanSchoolLookUp(newData);
+    }
+
     csvData.data = newData;
 
     return csvData;
+  }
+
+  cleanSchoolLookUp(data: Object[]) {
+    const newData = [];
+
+    _.forEach(data, (element) => {
+      let canAdd = true;
+      _.forEach(this.quickCheckRemoveSchoolsIncludes, (key) => {
+        let text = element['title'].toLowerCase();
+        if (text.includes(key.toLowerCase())) {
+          canAdd = false;
+          return;
+        }
+      });
+      if(canAdd){
+        newData.push(element);
+      }
+    });
+
+    return newData;
   }
 
   removeCsv(fileName) {
