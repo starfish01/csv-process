@@ -22,7 +22,8 @@ export class CsvServiceService {
     'ABC Learning Centres',
     'Deceased',
     'Didnt leave',
-    'Didnt leave',
+    "Didn/'t",
+    'hospital',
     'Drama School',
     'Early Learners',
     'Family Day Care',
@@ -46,10 +47,19 @@ export class CsvServiceService {
     'Kids',
     'TAFE',
     'PreSchool',
+    'Pre School',
+    'Pre-School',
+    'Pre-Sch',
+    'Pre Sch',
+    'Pre Primary',
+    'Pre-Primary',
     'University',
     'Childrens Centre',
     'YMCA',
+    'United Arba Emirates',
   ];
+
+  fillerWords = ['st', 'saint', 'school', 'college'];
 
   constructor(
     private cookieService: CookieService,
@@ -68,15 +78,21 @@ export class CsvServiceService {
   }
 
   quickFormat(file) {
-    //
     const csvData = file;
     let newData = [];
 
     _.forEach(csvData.data, (row) => {
-      const title = row.Description;
-      const value = row.Code;
+      let title = row.Description;
+      let value = row.Code;
       if (!title || !value) {
-        return;
+
+        // might be a previously opened document
+        if (row.title && row.value) {
+          title = row.title;
+          value = row.value;
+        } else {
+          return;
+        }
       }
       newData.push({
         value,
@@ -87,7 +103,7 @@ export class CsvServiceService {
     newData = _.uniqBy(newData, 'title');
     newData = _.uniqBy(newData, 'value');
 
-    if (csvData.fileName === 'LookupSchool') {
+    if (csvData.fileName.includes('LookupSchool')) {
       newData = this.cleanSchoolLookUp(newData);
     }
 
@@ -98,7 +114,7 @@ export class CsvServiceService {
 
   cleanSchoolLookUp(data: Object[]) {
     const newData = [];
-
+    // remove included values
     _.forEach(data, (element) => {
       let canAdd = true;
       _.forEach(this.quickCheckRemoveSchoolsIncludes, (key) => {
@@ -108,12 +124,34 @@ export class CsvServiceService {
           return;
         }
       });
-      if(canAdd){
+      if (canAdd) {
         newData.push(element);
       }
     });
+    // remove anything under 3 words
+    const filteredShortNames = [];
+    _.forEach(newData, (element) => {
+      const sentenceArray: [String] = element['title'].split(' ');
+      if (sentenceArray.length >= 3) {
+        let hasFiller = 0;
 
-    return newData;
+        _.forEach(this.fillerWords, (el) => {
+          let findCheck = _.find(sentenceArray, (item) => {
+            return item.toLowerCase() === el;
+          });
+
+          if (findCheck) {
+            hasFiller++;
+          }
+        });
+
+        const acceptableLength = sentenceArray.length - hasFiller;
+        if (hasFiller === 0 || acceptableLength >= 3) {
+          filteredShortNames.push(element);
+        }
+      }
+    });
+    return filteredShortNames;
   }
 
   removeCsv(fileName) {

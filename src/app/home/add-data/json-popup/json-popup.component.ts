@@ -47,8 +47,8 @@ export class JsonPopupComponent implements OnInit {
     // this.editorOptions.modes = ['code', 'text', 'tree', 'view'];
     this.editorOptions.mode = 'code';
     this.data = [
-      { title: 'm', value: 'm' },
-      { title: 'f', value: 'm' },
+      { title: 'M', value: 'M' },
+      { title: 'F', value: 'F' },
     ];
   }
 }
