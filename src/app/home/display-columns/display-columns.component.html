@@ -1,7 +1,8 @@
 <div class="container margin-bottom-2">
   <table class="table is-striped">
-    <tr>
-      <th *ngFor="let item of columnTitle;let i = index; trackBy:trackByFn">
+    <tr cdkDropList (cdkDropListDropped)="drop($event)" >
+      <th cdkDrag *ngFor="let item of columnTitle;let i = index; trackBy:trackByFn">
+        <mat-icon aria-hidden="false" slot="start">list</mat-icon>
         <div class="field has-addons">
           <div class="control">
             <input class="input" [(ngModel)]="columnTitle[i]" type="text" placeholder="Column Title">
@@ -17,7 +18,7 @@
         <div class="buttons" >
           <button class="button is-primary" (click)="onSaveSelected()">
             <mat-icon aria-hidden="false" slot="start">save</mat-icon>
-            <span slot="end"> Save Headings</span>
+            <span slot="end"> Save</span>
           </button>
         </div>
       </th>

@@ -1,12 +1,20 @@
 <div class="container margin-bottom-2">
   <p>Remove duplicates from column</p>
   <div class="buttons">
-    <button (click)="removeDuplicates(title)" class="button is-info" *ngFor="let title of selectedCsv.columnTitle">{{title}}</button>
+    <button (click)="removeDuplicates(title)" class="button is-info"
+      *ngFor="let title of selectedCsv.columnTitle">{{title}}</button>
   </div>
 
   <p>Remove empty values from column</p>
   <div class="buttons">
-    <button (click)="removeEmptyVaules(title)" class="button is-info" *ngFor="let title of selectedCsv.columnTitle">{{title}}</button>
+    <button (click)="removeEmptyVaules(title)" class="button is-info"
+      *ngFor="let title of selectedCsv.columnTitle">{{title}}</button>
+  </div>
+
+  <p>Duplicate Column</p>
+  <div class="buttons">
+    <button (click)="duplicateColumn(title)" class="button is-info"
+      *ngFor="let title of selectedCsv.columnTitle">{{title}}</button>
   </div>
 
 

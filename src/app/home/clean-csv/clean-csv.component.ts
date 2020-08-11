@@ -31,7 +31,16 @@ export class CleanCsvComponent implements OnInit, OnDestroy {
   }
 
   removeEmptyVaules(title: string) {
-    this.selectedCsv.data = _.filter(this.selectedCsv.data, (o) => { return o[title]; });
+    this.selectedCsv.data = _.filter(this.selectedCsv.data, (o) => o[title]);
+    this.csvService.updateCsv(this.selectedCsv);
+  }
+
+  duplicateColumn(title: string) {
+    const duplicatedColumnTitle = title + '_' + Date.now();
+    _.forEach(this.selectedCsv.data, (el) => {
+      el[duplicatedColumnTitle] = el[title];
+    });
+
     this.csvService.updateCsv(this.selectedCsv);
   }
 

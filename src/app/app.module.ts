@@ -16,6 +16,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { NgJsonEditorModule } from 'ang-jsoneditor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { MatDialogModule } from '@angular/material/dialog';
 
@@ -57,6 +58,7 @@ import { JsonPopupComponent } from './home/add-data/json-popup/json-popup.compon
     MatSnackBarModule,
     MatTooltipModule,
     MatDialogModule,
+    DragDropModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

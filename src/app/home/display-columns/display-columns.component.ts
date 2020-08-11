@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CsvServiceService } from '../csv-service.service';
 import * as _ from 'lodash';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-display-columns',
@@ -34,7 +35,7 @@ export class DisplayColumnsComponent implements OnInit, OnDestroy {
     this.onSaveSelected();
     const updatedArray = [];
     _.forEach(this.selectedCsv.data, (row) => {
-      let newObj = {};
+      const newObj = {};
       _.forOwn(row, (value, key) => {
         if (key !== colTitle) {
           newObj[key] = value;
@@ -54,7 +55,7 @@ export class DisplayColumnsComponent implements OnInit, OnDestroy {
     const newObjArray = [];
     _.forEach(this.selectedCsv.data, (el, index, arr) => {
       // each element in object
-      let newObj = {};
+      const newObj = {};
       _.forOwn(el, (value, key) => {
         // loop through the original titles
         _.forEach(this.originalColumnTitle, (originalKey, index) => {
@@ -72,9 +73,16 @@ export class DisplayColumnsComponent implements OnInit, OnDestroy {
   setColHeadings() {
     this.columnTitle = [];
     this.columnTitle = _.clone(this.selectedCsv.columnTitle);
-
     this.originalColumnTitle = [];
     this.originalColumnTitle = _.clone(this.selectedCsv.columnTitle);
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    // console.log(this.columnTitle[event.previousIndex]);
+    // moveItemInArray(this.columnTitle, event.previousIndex, event.currentIndex);
+    // console.log(event);
+
+    // need to update values
   }
 
   ngOnDestroy() {

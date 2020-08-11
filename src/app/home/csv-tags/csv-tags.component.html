@@ -1,7 +1,7 @@
 <div class="container margin-bottom-2">
   <div class="columns is-multiline is-mobile">
 
-    <div class="column" *ngFor="let csv of csvData">
+    <div class="column is-narrow" *ngFor="let csv of csvData">
       <a [className]="(selectedCsv && selectedCsv.fileName === csv.fileName) ? 'is-primary tag is-medium' : 'is-info tag is-medium'"
         (click)="onSelectCsv(csv)">
         {{csv.fileName}}

@@ -8,7 +8,7 @@
       <li [class]="viewSelected === 'export' ? 'is-active' : ''">
         <a (click)="onViewChange('export')">
           <mat-icon aria-hidden="false" slot="start">file_copy</mat-icon>
-          <span>Export CSV/Copy JSON</span>
+          <span>Export CSV/JSON</span>
         </a>
       </li>
       <li [class]="viewSelected === 'update-columns' ? 'is-active' : ''">
@@ -17,16 +17,16 @@
           <span>Update Columns</span>
         </a>
       </li>
+      <li [class]="viewSelected === 'clean-data' ? 'is-active' : ''">
+        <a (click)="onViewChange('clean-data')">
+          <mat-icon aria-hidden="false" slot="start">sort</mat-icon>
+          <span>Edit Data</span>
+        </a>
+      </li>
       <li [class]="viewSelected === 'json-edit' ? 'is-active' : ''">
         <a (click)="onViewChange('json-edit')">
           <mat-icon aria-hidden="false" slot="start">format_align_left</mat-icon>
           <span>JSON Edit</span>
-        </a>
-      </li>
-      <li [class]="viewSelected === 'clean-data' ? 'is-active' : ''">
-        <a (click)="onViewChange('clean-data')">
-          <mat-icon aria-hidden="false" slot="start">sort</mat-icon>
-          <span>Clean Data</span>
         </a>
       </li>
     </ul>
