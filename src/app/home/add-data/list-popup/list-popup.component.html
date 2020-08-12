@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Add JSON</h1>
+<div class="container margin-bottom-2">
+
+  <div class="field">
+    <label class="label">File Title</label>
+    <div class="control">
+      <input class="input" [(ngModel)]="fileTitle" type="text" placeholder="e.g genderTable">
+    </div>
+  </div>
+
+</div>
+<div class="container margin-bottom-2">
+  <div class="control">
+    <label class="label">List</label>
+    <textarea class="textarea" [(ngModel)]="data" rows="10"></textarea>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button color="primary" mat-button (click)="onClickSave()">Save</button>
+  <button color="warn" style="margin-left: auto;" mat-button (click)="onNoClick()">Close</button>
+</div>

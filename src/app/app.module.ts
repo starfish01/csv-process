@@ -29,6 +29,7 @@ import { CleanCsvComponent } from './home/clean-csv/clean-csv.component';
 import { JsonEditComponent } from './home/json-edit/json-edit.component';
 import { SnackbarComponent } from './home/includes/snackbar/snackbar.component';
 import { JsonPopupComponent } from './home/add-data/json-popup/json-popup.component';
+import { ListPopupComponent } from './home/add-data/list-popup/list-popup.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { JsonPopupComponent } from './home/add-data/json-popup/json-popup.compon
     JsonEditComponent,
     SnackbarComponent,
     JsonPopupComponent,
+    ListPopupComponent,
   ],
   imports: [
     BrowserModule,

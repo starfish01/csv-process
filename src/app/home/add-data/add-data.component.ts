@@ -5,6 +5,7 @@ import { CsvServiceService } from '../csv-service.service';
 
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { JsonPopupComponent } from './json-popup/json-popup.component';
+import { ListPopupComponent } from './list-popup/list-popup.component';
 
 @Component({
   selector: 'app-add-data',
@@ -19,14 +20,13 @@ export class AddDataComponent implements OnInit {
   ) {}
 
   quickFormat = false;
-  quickFormatInfo = 'This will remove all columns bar code and description and will remove any rows without values and any duplicates. Schools will be cleaned';
+  quickFormatInfo =
+    'This will remove all columns bar code and description and will remove any rows without values and any duplicates. Schools will be cleaned';
   removeInvalidChars = true;
-
 
   ngOnInit(): void {}
 
   csvInputChange(fileInputEvent: any) {
-
     _.forEach(fileInputEvent.target.files, (file) => {
       const options = {
         header: true,
@@ -35,10 +35,13 @@ export class AddDataComponent implements OnInit {
         // skipEmptyLines: 'greedy',
         complete: (result) => {
           const filename = file.name.replace('.csv', '');
-          this.csvDataService.addCsv({
-            fileName: filename,
-            data: result.data,
-          }, this.quickFormat);
+          this.csvDataService.addCsv(
+            {
+              fileName: filename,
+              data: result.data,
+            },
+            this.quickFormat
+          );
         },
         transform: (res) => {
           if (!this.removeInvalidChars) {
@@ -61,5 +64,16 @@ export class AddDataComponent implements OnInit {
     dialogConfig.width = '100vw';
 
     this.dialog.open(JsonPopupComponent, dialogConfig);
+  }
+
+  addByList() {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '800px';
+    dialogConfig.width = '100vw';
+
+    this.dialog.open(ListPopupComponent, dialogConfig);
   }
 }
