@@ -44,6 +44,15 @@ export class CleanCsvComponent implements OnInit, OnDestroy {
     this.csvService.updateCsv(this.selectedCsv);
   }
 
+  addRowOfNumbers() {
+    const duplicatedColumnTitle = 'id_' + Date.now();
+    _.forEach(this.selectedCsv.data, (el, key) => {
+      el[duplicatedColumnTitle] = key;
+    });
+
+    this.csvService.updateCsv(this.selectedCsv);
+  }
+
   ngOnDestroy() {
     this.selectedCsvSub.unsubscribe();
   }
