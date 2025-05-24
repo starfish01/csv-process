@@ -13,7 +13,7 @@ COPY . .
 
 # Build the application for production
 # The output directory is specified in angular.json: "outputPath": "dist/csv-process"
-RUN npm run build -- --prod
+RUN npm run build --prod
 
 # Stage 2: Serve the application with Nginx
 FROM nginx:alpine
