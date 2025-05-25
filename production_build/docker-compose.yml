@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  angular-frontend:
+    container_name: my_angular_frontend_app
+    build:
+      context: .  # Specifies that Docker should use the current directory as the build context
+      dockerfile: Dockerfile  # Specifies the name of the Dockerfile to use
+    ports:
+      - "8080:80"  # Maps port 8080 on your host machine to port 80 in the container (where Nginx is listening)
+    restart: unless-stopped
+    # If you intend to use this with your existing Caddy setup,
+    # you might want to add it to the 'caddy_net' network.
+    # networks:
+    #   - caddy_net
+
+# If you uncommented the networks section above for Caddy integration,
+# and 'caddy_net' is an existing external network, you would also uncomment this:
+# networks:
+#   caddy_net:
+#     external: true
