@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  angular-frontend:
-    container_name: my_angular_frontend_app
+  csv-process-app:
+    container_name: csv-process-app
     build:
       context: .  # Specifies that Docker should use the current directory as the build context
       dockerfile: Dockerfile  # Specifies the name of the Dockerfile to use
@@ -11,11 +11,11 @@ services:
     restart: unless-stopped
     # If you intend to use this with your existing Caddy setup,
     # you might want to add it to the 'caddy_net' network.
-    # networks:
-    #   - caddy_net
+    networks:
+      - caddy_net
 
 # If you uncommented the networks section above for Caddy integration,
 # and 'caddy_net' is an existing external network, you would also uncomment this:
-# networks:
-#   caddy_net:
-#     external: true
+networks:
+  caddy_net:
+    external: true
